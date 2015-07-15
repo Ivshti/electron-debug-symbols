@@ -5,6 +5,8 @@ if [ ! $1 ]; then
 	exit 1
 fi
 
+# TODO: allow installing debug symbols for multiple electron versions  through passing a var $ELECTRON_VERSIONS
+
 mkdir -p symbols/{win32,darwin,linux}
 
 if [ `which bsdtar` ] && [ ! $FORCE_UNZIP ]; then 

@@ -8,3 +8,6 @@ minidump.addSymbolPath.apply(minidump, require("electron-debug-symbols").paths);
 
 // now when using minidump.walkStack, it would give a more understandable report due to having debug symbols
 ```
+
+# TODO
+* allow fetching debug symbols for multiple electron versions through environment variable ELECTRON_VERSIONS
