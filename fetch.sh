@@ -5,18 +5,17 @@ if [ ! $1 ]; then
 	exit 1
 fi
 
-if [ `which bsdtar` ]; then 
+mkdir -p symbols/{win32,darwin,linux}
+
+if [ `which bsdtar` ] && [ ! $FORCE_UNZIP ]; then 
 	cmd="bsdtar -xvf-"
-#elif [ `which unzip` ]; then
-#	cmd="unzip x"
-elif [ `which jar` ]; then #heroku case
-	cmd="jar xvf"
-else
-	echo "error - unable to find a command to unzip electron debug symbols"
-	exit 1
+	( cd symbols/win32 ; wget -O - https://github.com/atom/electron/releases/download/v0.29.2/electron-v${1}-win32-ia32-symbols.zip | $cmd )
+	( cd symbols/darwin ; wget -O - https://github.com/atom/electron/releases/download/v0.29.2/electron-v${1}-darwin-x64-symbols.zip | $cmd )
+	( cd symbols/linux ; wget -O - https://github.com/atom/electron/releases/download/v0.29.2/electron-v${1}-linux-x64-symbols.zip | $cmd )
+elif [ `which unzip` ]; then
+	cmd="unzip -x"
+	( cd symbols/win32 ; wget -O - https://github.com/atom/electron/releases/download/v0.29.2/electron-v${1}-win32-ia32-symbols.zip > /tmp/win32.zip ; $cmd /tmp/win32.zip )
+	( cd symbols/darwin ; wget -O - https://github.com/atom/electron/releases/download/v0.29.2/electron-v${1}-darwin-x64-symbols.zip > /tmp/darwin.zip ; $cmd /tmp/darwin.zip )
+	( cd symbols/linux ; wget -O - https://github.com/atom/electron/releases/download/v0.29.2/electron-v${1}-linux-x64-symbols.zip > /tmp/linux.zip ; $cmd /tmp/linux.zip )	
 fi
 
-mkdir -p symbols/{win32,darwin,linux}
-( cd symbols/win32 ; wget -O - https://github.com/atom/electron/releases/download/v0.29.2/electron-v${1}-win32-ia32-symbols.zip | $cmd )
-( cd symbols/darwin ; wget -O - https://github.com/atom/electron/releases/download/v0.29.2/electron-v${1}-linux-x64-symbols.zip | $cmd )
-( cd symbols/linux ; wget -O - https://github.com/atom/electron/releases/download/v0.29.2/electron-v${1}-darwin-x64-symbols.zip | $cmd )
