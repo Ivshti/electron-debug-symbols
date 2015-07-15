@@ -7,8 +7,8 @@ fi
 
 if [ `which bsdtar` ]; then 
 	cmd="bsdtar -xvf-"
-elif [ `which unzip` ]; then
-	cmd="unzip x"
+#elif [ `which unzip` ]; then
+#	cmd="unzip x"
 elif [ `which jar` ]; then #heroku case
 	cmd="jar xvf"
 else
