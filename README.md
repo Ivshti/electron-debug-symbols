@@ -2,7 +2,7 @@
 npm module to install electron debug symbols
 
 # usage
-```
+```javascript
 var minidump = require("minidump");
 minidump.addSymbolPath.apply(minidump, require("electron-debug-symbols").paths);
 
