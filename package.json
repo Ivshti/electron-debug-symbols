@@ -1,6 +1,6 @@
 {
   "name": "electron-debug-symbols",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Install electron debug symbols using npm",
   "repository": {
     "type": "git",
