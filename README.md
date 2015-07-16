@@ -9,5 +9,7 @@ minidump.addSymbolPath.apply(minidump, require("electron-debug-symbols").paths);
 // now when using minidump.walkStack, it would give a more understandable report due to having debug symbols
 ```
 
-# TODO
-* allow fetching debug symbols for multiple electron versions through environment variable ELECTRON_VERSIONS
+You can use ELECTRON_VERSIONS environment variables to make the module install custom versions, for example when deploying to heroku.
+```
+heroku config:set ELECTRON_VERSIONS="0.29.2 0.27.1"
+```
